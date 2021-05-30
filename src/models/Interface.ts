@@ -14,7 +14,7 @@ export default class Interface {
   constructor() {}
 
   // first question
-  async firstQuest(): Promise<void> {
+  async run(): Promise<void> {
     const answers: Answers = await inquirer.prompt([
       {
         type: 'list',

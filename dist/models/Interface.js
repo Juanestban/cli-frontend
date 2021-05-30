@@ -51,7 +51,7 @@ var Interface = /** @class */ (function () {
         this.urlNextWithoutTsWithCleanners = 'https://github.com/Juanestban/next-js-personalizated.git';
     }
     // first question
-    Interface.prototype.firstQuest = function () {
+    Interface.prototype.run = function () {
         return __awaiter(this, void 0, void 0, function () {
             var answers;
             return __generator(this, function (_a) {

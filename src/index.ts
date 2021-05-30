@@ -3,6 +3,4 @@ import Interface from './models/Interface';
 // import fs from 'fs'
 // fs.writeFile('index.js', 'console.log(\'index!!\')', {}, () => {})
 
-const inter: Interface = new Interface();
-
-inter.firstQuest();
+export = Interface;

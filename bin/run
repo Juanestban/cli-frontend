@@ -23,13 +23,12 @@ function execCommand(command) {
 const conditional = fs.existsSync(realCurrentPath);
 console.info("[+] - the path of package 'clifrontend':", realCurrentPath);
 if (conditional) {
-  const command2 = `node ${realCurrentPath}`;
   console.info("[+] - exist the path dist/index.js from package 'clifrontend'");
-  execCommand(command2);
+  require(realCurrentPath).run();
   return;
 }
 
 console.log("hasn't folder dist");
-// const command1 = path.join('npx tsc', __dirname, '/../src/');
-// const command2 = path.join('node', __dirname, '/../dist/index.js');
-// execCommand(`${command1} && ${command2}`);
+const command1 = path.join(__dirname, '/../src/');
+const command2 = path.join(__dirname, '/../dist/index.js');
+execCommand(`npx tsc ${command1} && node ${command2}`);
