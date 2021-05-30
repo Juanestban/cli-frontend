@@ -1,0 +1,30 @@
+#!/usr/bin/env node
+
+const fs = require('fs');
+const { exec } = require('child_process');
+
+function execCommand(command) {
+  exec(command, (error, stdout, stderr) => {
+    if (error) {
+      console.log(error);
+      return;
+    }
+    if (stdout) {
+      console.log(stdout);
+      return;
+    }
+    console.log(stderr);
+  });
+}
+
+const conditional = fs.existsSync('../dist/index.js');
+
+if (conditional) {
+  const command = 'npm start';
+  execCommand(command);
+  return;
+}
+
+const command = 'npm run compile:exec && npm start';
+console.log("hasn't folder dist");
+execCommand(command);

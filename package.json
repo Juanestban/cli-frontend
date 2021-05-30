@@ -1,0 +1,40 @@
+{
+  "name": "cli-frontend",
+  "version": "0.1.0",
+  "description": "command line interface for create defaultly the project with the tools needs and requires for initialzer in React or nextjs with ts and cleanners like prettier, eslint and lint-staged",
+  "bin": {
+    "clifrontend": "./bin/run"
+  },
+  "main": "./dist/index.js",
+  "author": {
+    "email": "juanestban000@gmail.com",
+    "name": "Juan Esteban Echeverry Perdomo",
+    "url": "https://github.com/Juanestban"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Juanestban/cli-frontend"
+  },
+  "license": "ISC",
+  "scripts": {
+    "init": "tsc --init",
+    "start": "node dist/index.js",
+    "build": "tsc",
+    "compile:exec": "npm run build && npm start"
+  },
+  "keywords": [
+    "inquirer",
+    "react",
+    "next",
+    "prettier",
+    "eslint",
+    "lint-staged"
+  ],
+  "dependencies": {
+    "inquirer": "8.1.0"
+  },
+  "devDependencies": {
+    "@types/inquirer": "7.3.1",
+    "typescript": "4.3.2"
+  }
+}
