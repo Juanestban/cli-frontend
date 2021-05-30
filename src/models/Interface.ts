@@ -60,6 +60,6 @@ export default class Interface {
       });
       return;
     }
-    console.log('not available');
+    console.log('not available in this momment, wait for next versions');
   }
 }
