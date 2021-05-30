@@ -23,7 +23,7 @@ function execCommand(command) {
 const conditional = fs.existsSync();
 
 if (conditional) {
-  const command2 = path.join('node', __dirname, '/../dist/index.js');
+  const command2 = `node ${realCurrentPath}`;
   execCommand(command2);
   return;
 }
