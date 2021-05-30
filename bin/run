@@ -24,7 +24,8 @@ const conditional = fs.existsSync(realCurrentPath);
 console.info("[+] - the path of package 'clifrontend':", realCurrentPath);
 if (conditional) {
   console.info("[+] - exist the path dist/index.js from package 'clifrontend'");
-  require(realCurrentPath).run();
+  const newPath = path.join(__dirname, '/../dist');
+  require(newPath).run();
   return;
 }
 

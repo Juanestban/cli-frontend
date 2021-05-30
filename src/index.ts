@@ -3,4 +3,6 @@ import Interface from './models/Interface';
 // import fs from 'fs'
 // fs.writeFile('index.js', 'console.log(\'index!!\')', {}, () => {})
 
-export = Interface;
+const interfa = new Interface();
+
+export = interfa;
