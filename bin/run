@@ -20,10 +20,11 @@ function execCommand(command) {
   });
 }
 
-const conditional = fs.existsSync();
-
+const conditional = fs.existsSync(realCurrentPath);
+console.info("[+] - the path of package 'clifrontend':", realCurrentPath);
 if (conditional) {
   const command2 = `node ${realCurrentPath}`;
+  console.info("[+] - exist the path dist/index.js from package 'clifrontend'");
   execCommand(command2);
   return;
 }
