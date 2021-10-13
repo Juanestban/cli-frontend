@@ -15,6 +15,11 @@ export default class Interface implements CliFrontnend {
   async run(): Promise<void> {
     const answers: Answers = await inquirer.prompt([
       {
+        type: 'input',
+        name: 'nameApplication',
+        message: 'What is the name of the project?',
+      },
+      {
         type: 'list',
         name: TypesStateSession.nextOrReact,
         message: 'what are the library/framework that you will use?',
@@ -48,19 +53,18 @@ export default class Interface implements CliFrontnend {
       !answers[TypesStateSession.ifImplementTs] &&
       answers[TypesStateSession.cleanners]
     ) {
-      const cmd1: string = 'npm --version';
-      const cmd2: string = 'ls';
-      const cmd3: string = 'node --version';
-      const allCmds: string[] = [cmd1, cmd2, cmd3];
+      const allCmds: string[] = ["echo 'cmd1'"];
       const echo: string =
         "echo \"[+] This is de option using 'Nextjs' - 'without typescript' - 'with the prettier, eslint and lint-staged'\"";
+      const nameProject = answers;
       const separator: string = handleTypeSO(
         answers[TypesStateSession.typeOf_SO]
       );
 
       const commandForExec: string = this.separatorsCommand(allCmds, separator);
 
-      console.info(echo);
+      exec(echo);
+      exec(`echo ${nameProject}`);
       exec(commandForExec, handleErrorCommands);
       return;
     }
