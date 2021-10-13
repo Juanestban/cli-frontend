@@ -1,11 +1,11 @@
 {
   "name": "cli-frontend",
-  "version": "1.0.2",
+  "version": "1.0.5",
   "description": "command line interface for create defaultly the project with the tools needs and requires for initialzer in React or nextjs with ts and cleanners like prettier, eslint and lint-staged",
   "bin": {
     "cli-frontend": "./bin/run"
   },
-  "main": "./dist/index.js",
+  "main": "./bin/run",
   "author": {
     "email": "juanestban000@gmail.com",
     "name": "Juan Esteban Echeverry Perdomo",
