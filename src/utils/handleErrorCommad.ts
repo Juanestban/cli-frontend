@@ -1,5 +1,5 @@
-import { HandErrCommands } from './../interfaces/HandErrCommands';
 import { ExecException } from 'child_process';
+import { HandErrCommands } from './../interfaces/HandErrCommands';
 
 export const handleErrorCommands = (
   error: ExecException | null,
