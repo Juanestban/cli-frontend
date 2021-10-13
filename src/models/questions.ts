@@ -27,7 +27,7 @@ export const questions: QuestionCollection<any> = [
   },
   {
     type: 'list',
-    name: TypesStateSession.typeOf_SO,
+    name: TypesStateSession.typeOf_OS,
     message: 'what are you system operative?',
     choices: ['Windows', 'Mac', 'Linux'],
   },

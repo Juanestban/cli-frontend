@@ -15,5 +15,5 @@ export interface Questions {
   ifImplementTs: boolean;
   cleanners: boolean;
   nameApplication: string;
-  typeOf_SO: 'Windows' | 'Mac' | 'Linux';
+  typeOf_OS: 'Windows' | 'Mac' | 'Linux';
 }

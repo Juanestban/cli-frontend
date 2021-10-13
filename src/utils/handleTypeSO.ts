@@ -1,11 +1,9 @@
-import { TypesStateSession } from '../interfaces/TypesTateSession';
 import {
   SystemOperatives,
   systemOperativeEnum,
 } from '../interfaces/SystemOperatives';
 
-export const handleTypeSO = (so: SystemOperatives): string => {
-  console.log(so);
+export const handleTypeOS = (so: SystemOperatives): string => {
   const conditionals = {
     [systemOperativeEnum.Windows]: ';',
     [systemOperativeEnum.Mac]: '&&',

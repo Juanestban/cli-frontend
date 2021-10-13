@@ -15,5 +15,5 @@ export enum TypesStateSession {
   nextOrReact = 'nextOrReact',
   ifImplementTs = 'ifImplementTs',
   cleanners = 'cleanners',
-  typeOf_SO = 'typeOf_SO',
+  typeOf_OS = 'typeOf_OS',
 }
