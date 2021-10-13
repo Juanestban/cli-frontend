@@ -1,14 +1,11 @@
 import inquirer, { Answers } from 'inquirer';
 import { exec } from 'child_process';
+import { CliFrontnend } from './../interfaces/CliFrontnend';
 import { handleErrorCommands } from '../utils/handleErrorCommad';
+import { TypesStateSession } from '../interfaces/TypesTateSession';
+import { handleTypeSO } from '../utils/handleTypeSO';
 
-const types = {
-  0: 'nextOrReact',
-  1: 'ifImplementTs',
-  2: 'cleanners',
-};
-
-export default class Interface {
+export default class Interface implements CliFrontnend {
   public urlNextWithoutTsWithCleanners: string =
     'https://github.com/Juanestban/next-js-personalizated.git';
 
@@ -19,21 +16,27 @@ export default class Interface {
     const answers: Answers = await inquirer.prompt([
       {
         type: 'list',
-        name: types[0],
+        name: TypesStateSession.nextOrReact,
         message: 'what are the library/framework that you will use?',
         choices: ['React', 'Next'],
       },
       {
         type: 'confirm',
-        name: types[1],
+        name: TypesStateSession.ifImplementTs,
         message: 'are you wish implement typescript?',
         default: false,
       },
       {
         type: 'confirm',
-        name: types[2],
+        name: TypesStateSession.cleanners,
         message: 'are you install eslint, prettier and lintstaged?',
         default: true,
+      },
+      {
+        type: 'list',
+        name: TypesStateSession.typeOf_SO,
+        message: 'what are you system operative?',
+        choices: ['Windows', 'Mac', 'Linux'],
       },
     ]);
     this.results(answers);
@@ -41,16 +44,29 @@ export default class Interface {
 
   results(answers: Answers): void {
     if (
-      answers[types[0]] === 'Next' &&
-      !answers[types[1]] &&
-      answers[types[2]]
+      answers[TypesStateSession.nextOrReact] === 'Next' &&
+      !answers[TypesStateSession.ifImplementTs] &&
+      answers[TypesStateSession.cleanners]
     ) {
-      // const command: string = `git clone ${this.urlNextWithoutTsWithCleanners}`;
-      const command = 'npm --version && dir && node --version';
+      const cmd1: string = 'npm --version';
+      const cmd2: string = 'ls';
+      const cmd3: string = 'node --version';
+      const allCmds: string[] = [cmd1, cmd2, cmd3];
+      const echo: string =
+        "echo \"This is de option using 'Nextjs' - 'without typescript' - 'with the prettier, eslint and lint-staged'\"";
+      const separator: string = handleTypeSO(
+        answers[TypesStateSession.typeOf_SO]
+      );
 
-      exec(command, handleErrorCommands);
+      const commandForExec: string = this.separatorsCommand(allCmds, separator);
+
+      exec(commandForExec, handleErrorCommands);
       return;
     }
     console.log('not available in this momment, wait for next versions');
+  }
+
+  separatorsCommand(cmds: string[], typeSeparator: string): string {
+    return cmds.join(typeSeparator);
   }
 }
