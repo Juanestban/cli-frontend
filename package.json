@@ -1,6 +1,6 @@
 {
   "name": "cli-frontend",
-  "version": "0.8.1",
+  "version": "0.8.2",
   "description": "command line interface for create defaultly the project with the tools needs and requires for initialzer in React or nextjs with ts and cleanners like prettier, eslint and lint-staged",
   "bin": {
     "cli-frontend": "./bin/run"
@@ -33,11 +33,12 @@
     "lint-staged"
   ],
   "dependencies": {
-    "inquirer": "8.1.0"
+    "inquirer": "8.1.0",
+    "ora": "5.4.1"
   },
   "devDependencies": {
-    "nodemon": "2.0.13",
     "@types/inquirer": "7.3.1",
+    "nodemon": "2.0.13",
     "ts-node": "10.3.0",
     "typescript": "4.3.2"
   }

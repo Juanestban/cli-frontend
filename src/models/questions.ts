@@ -23,7 +23,8 @@ export const questions: QuestionCollection<any> = [
   {
     type: 'confirm',
     name: TypesStateSession.cleanners,
-    message: 'are you install eslint, prettier and lintstaged?',
+    message:
+      'are you install eslint, prettier and lintstaged? (only function with javascript)',
     default: true,
   },
   {

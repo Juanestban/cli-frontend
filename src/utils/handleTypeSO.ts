@@ -5,9 +5,9 @@ import {
 
 export const handleTypeOS = (so: SystemOperatives): string => {
   const conditionals = {
-    [systemOperativeEnum.Windows]: ';',
-    [systemOperativeEnum.Mac]: '&&',
-    [systemOperativeEnum.Linux]: '&&',
+    [systemOperativeEnum.Windows]: ' ; ',
+    [systemOperativeEnum.Mac]: ' && ',
+    [systemOperativeEnum.Linux]: ' && ',
     default: 'error in digit system operative',
   };
 
