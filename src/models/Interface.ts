@@ -1,13 +1,20 @@
-import inquirer, { Answers } from 'inquirer';
-import { exec } from 'child_process';
+import inquirer from 'inquirer';
+import ora from 'ora';
+import {
+  CliFrontnend,
+  TypesStateSession,
+  Questions,
+  ConditionalTecnologies,
+} from '../interfaces';
+import { handleTypeOS } from '../utils/handleTypeSO';
+import { questions } from './questions';
+import { CreateReactAppCommand } from './React';
+import { CreateNextAppCommand } from './NextJs';
+import { shellExec } from './ShellExec';
+import packageNecessary from './PackageNecessary';
+import cleannersPackageAndFiles from './WithCleanners';
 
-const types = {
-  0: 'nextOrReact',
-  1: 'ifImplementTs',
-  2: 'cleanners',
-};
-
-export default class Interface {
+export default class Interface implements CliFrontnend {
   public urlNextWithoutTsWithCleanners: string =
     'https://github.com/Juanestban/next-js-personalizated.git';
 
@@ -15,51 +22,53 @@ export default class Interface {
 
   // first question
   async run(): Promise<void> {
-    const answers: Answers = await inquirer.prompt([
-      {
-        type: 'list',
-        name: types[0],
-        message: 'what are the library/framework that you will use?',
-        choices: ['React', 'Next'],
-      },
-      {
-        type: 'confirm',
-        name: types[1],
-        message: 'are you wish implement typescript?',
-        default: false,
-      },
-      {
-        type: 'confirm',
-        name: types[2],
-        message: 'are you install eslint, prettier and lintstaged?',
-        default: true,
-      },
-    ]);
+    const answers: Questions = await inquirer.prompt(questions);
+    if (answers.typeOf_OS == 'Windows') {
+      console.log(
+        "[+] the OS Windows posibility hasn't function for the commands used to moment install and create files"
+      );
+      // if posibility hasn't function correctly for OS windows
+      this.results(answers);
+      return;
+    }
     this.results(answers);
   }
 
-  results(answers: Answers): void {
-    if (
-      answers[types[0]] === 'Next' &&
-      !answers[types[1]] &&
-      answers[types[2]]
-    ) {
-      // const command: string = `git clone ${this.urlNextWithoutTsWithCleanners}`;
-      const command = 'npm --version && dir && node --version';
+  results(answers: Questions): void {
+    let tech: string;
+    const spinner = ora({
+      text: 'Installing the project...',
+      discardStdin: false,
+    });
+    const { nextOrReact, ifImplementTs, cleanners, nameApplication } = answers;
+    const condTech: ConditionalTecnologies = {
+      React: () => CreateReactAppCommand(nameApplication, ifImplementTs),
+      Next: () => CreateNextAppCommand(nameApplication, ifImplementTs),
+    };
+    tech = condTech[nextOrReact]();
+    spinner.start();
 
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          console.log(error);
-          return;
-        }
-        if (stdout) {
-          console.log(stdout);
-          return;
-        }
-        console.log(stderr);
-      });
-      return;
-    }
-    console.log('not available in this momment, wait for next versions');
+    const allCmds: string[] = [
+      tech,
+      `cd ${nameApplication}`,
+      ...packageNecessary,
+    ];
+
+    if (cleanners) allCmds.push(...cleannersPackageAndFiles);
+
+    const separator: string = handleTypeOS(
+      answers[TypesStateSession.typeOf_OS]
+    );
+
+    const commandForExec: string = this.separatorsCommand(allCmds, separator);
+
+    shellExec(commandForExec, () => {
+      // console.clear();
+      spinner.succeed('Finished isntall the project!');
+    });
+  }
+
+  separatorsCommand(cmds: string[], typeSeparator: string): string {
+    return cmds.join(typeSeparator);
   }
 }

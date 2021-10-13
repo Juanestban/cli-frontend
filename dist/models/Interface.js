@@ -35,17 +35,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __spreadArray = (this && this.__spreadArray) || function (to, from) {
+    for (var i = 0, il = from.length, j = to.length; i < il; i++, j++)
+        to[j] = from[i];
+    return to;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var inquirer_1 = __importDefault(require("inquirer"));
-var child_process_1 = require("child_process");
-var types = {
-    0: 'nextOrReact',
-    1: 'ifImplementTs',
-    2: 'cleanners',
-};
+var ora_1 = __importDefault(require("ora"));
+var interfaces_1 = require("../interfaces");
+var handleTypeSO_1 = require("../utils/handleTypeSO");
+var questions_1 = require("./questions");
+var React_1 = require("./React");
+var NextJs_1 = require("./NextJs");
+var ShellExec_1 = require("./ShellExec");
+var PackageNecessary_1 = __importDefault(require("./PackageNecessary"));
+var WithCleanners_1 = __importDefault(require("./WithCleanners"));
 var Interface = /** @class */ (function () {
     function Interface() {
         this.urlNextWithoutTsWithCleanners = 'https://github.com/Juanestban/next-js-personalizated.git';
@@ -56,28 +64,15 @@ var Interface = /** @class */ (function () {
             var answers;
             return __generator(this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, inquirer_1.default.prompt([
-                            {
-                                type: 'list',
-                                name: types[0],
-                                message: 'what are the library/framework that you will use?',
-                                choices: ['React', 'Next'],
-                            },
-                            {
-                                type: 'confirm',
-                                name: types[1],
-                                message: 'are you wish implement typescript?',
-                                default: false,
-                            },
-                            {
-                                type: 'confirm',
-                                name: types[2],
-                                message: 'are you install eslint, prettier and lintstaged?',
-                                default: true,
-                            },
-                        ])];
+                    case 0: return [4 /*yield*/, inquirer_1.default.prompt(questions_1.questions)];
                     case 1:
                         answers = _a.sent();
+                        if (answers.typeOf_OS == 'Windows') {
+                            console.log("[+] the OS Windows posibility hasn't function for the commands used to moment install and create files");
+                            // if posibility hasn't function correctly for OS windows
+                            this.results(answers);
+                            return [2 /*return*/];
+                        }
                         this.results(answers);
                         return [2 /*return*/];
                 }
@@ -85,25 +80,33 @@ var Interface = /** @class */ (function () {
         });
     };
     Interface.prototype.results = function (answers) {
-        if (answers[types[0]] === 'Next' &&
-            !answers[types[1]] &&
-            answers[types[2]]) {
-            // const command: string = `git clone ${this.urlNextWithoutTsWithCleanners}`;
-            var command = 'npm --version && dir && node --version';
-            child_process_1.exec(command, function (error, stdout, stderr) {
-                if (error) {
-                    console.log(error);
-                    return;
-                }
-                if (stdout) {
-                    console.log(stdout);
-                    return;
-                }
-                console.log(stderr);
-            });
-            return;
-        }
-        console.log('not available in this momment, wait for next versions');
+        var tech;
+        var spinner = ora_1.default({
+            text: 'Installing the project...',
+            discardStdin: false,
+        });
+        var nextOrReact = answers.nextOrReact, ifImplementTs = answers.ifImplementTs, cleanners = answers.cleanners, nameApplication = answers.nameApplication;
+        var condTech = {
+            React: function () { return React_1.CreateReactAppCommand(nameApplication, ifImplementTs); },
+            Next: function () { return NextJs_1.CreateNextAppCommand(nameApplication, ifImplementTs); },
+        };
+        tech = condTech[nextOrReact]();
+        spinner.start();
+        var allCmds = __spreadArray([
+            tech,
+            "cd " + nameApplication
+        ], PackageNecessary_1.default);
+        if (cleanners)
+            allCmds.push.apply(allCmds, WithCleanners_1.default);
+        var separator = handleTypeSO_1.handleTypeOS(answers[interfaces_1.TypesStateSession.typeOf_OS]);
+        var commandForExec = this.separatorsCommand(allCmds, separator);
+        ShellExec_1.shellExec(commandForExec, function () {
+            // console.clear();
+            spinner.succeed('Finished isntall the project!');
+        });
+    };
+    Interface.prototype.separatorsCommand = function (cmds, typeSeparator) {
+        return cmds.join(typeSeparator);
     };
     return Interface;
 }());
