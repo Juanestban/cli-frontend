@@ -1,5 +1,6 @@
 import inquirer, { Answers } from 'inquirer';
 import { exec } from 'child_process';
+import { handleErrorCommands } from '../utils/handleErrorCommad';
 
 const types = {
   0: 'nextOrReact',
@@ -47,17 +48,7 @@ export default class Interface {
       // const command: string = `git clone ${this.urlNextWithoutTsWithCleanners}`;
       const command = 'npm --version && dir && node --version';
 
-      exec(command, (error, stdout, stderr) => {
-        if (error) {
-          console.log(error);
-          return;
-        }
-        if (stdout) {
-          console.log(stdout);
-          return;
-        }
-        console.log(stderr);
-      });
+      exec(command, handleErrorCommands);
       return;
     }
     console.log('not available in this momment, wait for next versions');
