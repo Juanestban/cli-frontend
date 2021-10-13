@@ -1,6 +1,6 @@
 {
   "name": "cli-frontend",
-  "version": "0.6.1",
+  "version": "0.8.1",
   "description": "command line interface for create defaultly the project with the tools needs and requires for initialzer in React or nextjs with ts and cleanners like prettier, eslint and lint-staged",
   "bin": {
     "cli-frontend": "./bin/run"
