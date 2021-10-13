@@ -57,3 +57,14 @@ export const eslint = `echo "module.exports = {
 export const eslintignore = `echo "${ignore}" > .eslintignore`;
 
 export const lintStaged = 'npx mrm@2 lint-staged';
+
+const cleanners: string[] = [
+  installCleanners,
+  prettier,
+  prettierignore,
+  eslint,
+  eslintignore,
+  lintStaged,
+];
+
+export default cleanners;
