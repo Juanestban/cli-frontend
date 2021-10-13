@@ -27,6 +27,7 @@
     "inquirer",
     "react",
     "next",
+    "typescript",
     "prettier",
     "eslint",
     "lint-staged"
