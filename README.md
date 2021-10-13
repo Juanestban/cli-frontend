@@ -7,5 +7,14 @@ this idea is for install all package required for develop if we need use only Re
 this command initializer the cli for install the project fastly
 
 ```
-npx clifrontend
+npm install -g cli-frontend
 ```
+
+#### Authors
+
+Juan Esteban Echeverry Perdomo
+- [GitHub](https://github.com/Juanestban)
+
+#### Anothers webs created
+
+- [code-write](https://code-write.vercel.app/) **missing for finish and implements more tools**

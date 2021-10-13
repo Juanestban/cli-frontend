@@ -53,13 +53,14 @@ export default class Interface implements CliFrontnend {
       const cmd3: string = 'node --version';
       const allCmds: string[] = [cmd1, cmd2, cmd3];
       const echo: string =
-        "echo \"This is de option using 'Nextjs' - 'without typescript' - 'with the prettier, eslint and lint-staged'\"";
+        "echo \"[+] This is de option using 'Nextjs' - 'without typescript' - 'with the prettier, eslint and lint-staged'\"";
       const separator: string = handleTypeSO(
         answers[TypesStateSession.typeOf_SO]
       );
 
       const commandForExec: string = this.separatorsCommand(allCmds, separator);
 
+      console.info(echo);
       exec(commandForExec, handleErrorCommands);
       return;
     }
