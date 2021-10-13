@@ -19,7 +19,7 @@
   "scripts": {
     "init": "tsc --init",
     "start": "node ./bin/run",
-    "dev": "nodemon ./src/run-dev",
+    "dev": "nodemon",
     "build": "tsc",
     "compile:exec": "npm run build && npm start"
   },
