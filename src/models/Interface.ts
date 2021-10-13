@@ -1,9 +1,18 @@
-import inquirer, { Answers } from 'inquirer';
+import inquirer from 'inquirer';
 import { exec } from 'child_process';
-import { CliFrontnend } from './../interfaces/CliFrontnend';
+import {
+  CliFrontnend,
+  TypesStateSession,
+  Questions,
+  ConditionalTecnologies,
+} from '../interfaces';
 import { handleErrorCommands } from '../utils/handleErrorCommad';
-import { TypesStateSession } from '../interfaces/TypesTateSession';
-import { handleTypeSO } from '../utils/handleTypeSO';
+import { handleTypeOS } from '../utils/handleTypeSO';
+import { questions } from './questions';
+import { CreateReactAppCommand } from './React';
+import { CreateNextAppCommand } from './NextJs';
+import packageNecessary from './PackageNecessary';
+import cleannersPackageAndFiles from './WithCleanners';
 
 export default class Interface implements CliFrontnend {
   public urlNextWithoutTsWithCleanners: string =
@@ -13,62 +22,43 @@ export default class Interface implements CliFrontnend {
 
   // first question
   async run(): Promise<void> {
-    const answers: Answers = await inquirer.prompt([
-      {
-        type: 'input',
-        name: 'nameApplication',
-        message: 'What is the name of the project?',
-      },
-      {
-        type: 'list',
-        name: TypesStateSession.nextOrReact,
-        message: 'what are the library/framework that you will use?',
-        choices: ['React', 'Next'],
-      },
-      {
-        type: 'confirm',
-        name: TypesStateSession.ifImplementTs,
-        message: 'are you wish implement typescript?',
-        default: false,
-      },
-      {
-        type: 'confirm',
-        name: TypesStateSession.cleanners,
-        message: 'are you install eslint, prettier and lintstaged?',
-        default: true,
-      },
-      {
-        type: 'list',
-        name: TypesStateSession.typeOf_SO,
-        message: 'what are you system operative?',
-        choices: ['Windows', 'Mac', 'Linux'],
-      },
-    ]);
+    const answers: Questions = await inquirer.prompt(questions);
+    if (answers.typeOf_OS == 'Windows') {
+      console.log(
+        "[+] the OS Windows posibility hasn't function for the commands used to moment install and create files"
+      );
+      // if posibility hasn't function correctly for OS windows
+      this.results(answers);
+      return;
+    }
     this.results(answers);
   }
 
-  results(answers: Answers): void {
-    if (
-      answers[TypesStateSession.nextOrReact] === 'Next' &&
-      !answers[TypesStateSession.ifImplementTs] &&
-      answers[TypesStateSession.cleanners]
-    ) {
-      const allCmds: string[] = ["echo 'cmd1'"];
-      const echo: string =
-        "echo \"[+] This is de option using 'Nextjs' - 'without typescript' - 'with the prettier, eslint and lint-staged'\"";
-      const nameProject = answers;
-      const separator: string = handleTypeSO(
-        answers[TypesStateSession.typeOf_SO]
-      );
+  results(answers: Questions): void {
+    let tech: string;
+    const { nextOrReact, ifImplementTs, cleanners, nameApplication } = answers;
+    const condTech: ConditionalTecnologies = {
+      React: () => CreateReactAppCommand(nameApplication, ifImplementTs),
+      Next: () => CreateNextAppCommand(nameApplication, ifImplementTs),
+    };
+    tech = condTech[nextOrReact]();
 
-      const commandForExec: string = this.separatorsCommand(allCmds, separator);
+    const allCmds: string[] = [
+      tech,
+      `cd ${nameApplication}`,
+      ...packageNecessary,
+      'echo "[+] Finished isntall"',
+    ];
 
-      exec(echo);
-      exec(`echo ${nameProject}`);
-      exec(commandForExec, handleErrorCommands);
-      return;
-    }
-    console.log('not available in this momment, wait for next versions');
+    if (cleanners) allCmds.push(...cleannersPackageAndFiles);
+
+    const separator: string = handleTypeOS(
+      answers[TypesStateSession.typeOf_OS]
+    );
+
+    const commandForExec: string = this.separatorsCommand(allCmds, separator);
+
+    exec(commandForExec, handleErrorCommands);
   }
 
   separatorsCommand(cmds: string[], typeSeparator: string): string {
