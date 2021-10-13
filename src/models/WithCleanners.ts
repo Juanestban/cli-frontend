@@ -23,10 +23,10 @@ package.json
 `;
 
 export const prettier = `echo '{
-  "semi": false;
-  "singleQuote": true;
-  "tabWidth": 2;
-}' > .pretterrc`;
+  "semi": false,
+  "singleQuote": true,
+  "tabWidth": 2,
+}' > .prettierrc`;
 
 export const prettierignore = `echo "${ignore}" > .prettierignore`;
 
