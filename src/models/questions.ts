@@ -6,6 +6,7 @@ export const questions: QuestionCollection<any> = [
     type: 'input',
     name: TypesStateSession.nameApplication,
     message: 'What is the name of the project?',
+    default: 'myapp',
   },
   {
     type: 'list',
