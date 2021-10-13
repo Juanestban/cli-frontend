@@ -10,6 +10,10 @@ for unitializer the project start with next command:
 npx cli-frontend
 ```
 
+### Next versions
+
+- missing add this package [chalk](https://www.npmjs.com/package/chalk)
+
 #### Authors
 
 Juan Esteban Echeverry Perdomo
