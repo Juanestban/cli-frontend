@@ -1,16 +1,16 @@
 import inquirer from 'inquirer';
-import { exec } from 'child_process';
+import ora from 'ora';
 import {
   CliFrontnend,
   TypesStateSession,
   Questions,
   ConditionalTecnologies,
 } from '../interfaces';
-import { handleErrorCommands } from '../utils/handleErrorCommad';
 import { handleTypeOS } from '../utils/handleTypeSO';
 import { questions } from './questions';
 import { CreateReactAppCommand } from './React';
 import { CreateNextAppCommand } from './NextJs';
+import { shellExec } from './ShellExec';
 import packageNecessary from './PackageNecessary';
 import cleannersPackageAndFiles from './WithCleanners';
 
@@ -36,18 +36,22 @@ export default class Interface implements CliFrontnend {
 
   results(answers: Questions): void {
     let tech: string;
+    const spinner = ora({
+      text: 'Installing the project...',
+      discardStdin: false,
+    });
     const { nextOrReact, ifImplementTs, cleanners, nameApplication } = answers;
     const condTech: ConditionalTecnologies = {
       React: () => CreateReactAppCommand(nameApplication, ifImplementTs),
       Next: () => CreateNextAppCommand(nameApplication, ifImplementTs),
     };
     tech = condTech[nextOrReact]();
+    spinner.start();
 
     const allCmds: string[] = [
       tech,
       `cd ${nameApplication}`,
       ...packageNecessary,
-      'echo "[+] Finished isntall"',
     ];
 
     if (cleanners) allCmds.push(...cleannersPackageAndFiles);
@@ -58,7 +62,10 @@ export default class Interface implements CliFrontnend {
 
     const commandForExec: string = this.separatorsCommand(allCmds, separator);
 
-    exec(commandForExec, handleErrorCommands);
+    shellExec(commandForExec, () => {
+      // console.clear();
+      spinner.succeed('Finished isntall the project!');
+    });
   }
 
   separatorsCommand(cmds: string[], typeSeparator: string): string {
