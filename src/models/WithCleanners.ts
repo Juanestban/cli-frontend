@@ -10,7 +10,7 @@ const packageCleaners = [
 
 export const installCleanners = (isReact: boolean): string =>
   `npm i ${
-    isReact ? 'eslint' : ''
+    !isReact ? 'eslint' : ''
   } eslint-config-prettier prettier ${packageCleaners.join(' ')}`;
 
 const ignore = `.next

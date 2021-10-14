@@ -97,7 +97,8 @@ var Interface = /** @class */ (function () {
             "cd " + nameApplication
         ], PackageNecessary_1.default);
         if (cleanners)
-            allCmds.push.apply(allCmds, WithCleanners_1.default);
+            allCmds.push.apply(allCmds, WithCleanners_1.default(nextOrReact === 'React'));
+        console.log(WithCleanners_1.default(nextOrReact === 'React'));
         var separator = handleTypeSO_1.handleTypeOS(answers[interfaces_1.TypesStateSession.typeOf_OS]);
         var commandForExec = this.separatorsCommand(allCmds, separator);
         ShellExec_1.shellExec(commandForExec, function () {

@@ -56,6 +56,7 @@ export default class Interface implements CliFrontnend {
 
     if (cleanners)
       allCmds.push(...cleannersPackageAndFiles(nextOrReact === 'React'));
+    console.log(cleannersPackageAndFiles(nextOrReact === 'React'));
 
     const separator: string = handleTypeOS(
       answers[TypesStateSession.typeOf_OS]
