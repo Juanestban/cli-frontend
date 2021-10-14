@@ -52,6 +52,7 @@ var questions_1 = require("./questions");
 var React_1 = require("./React");
 var NextJs_1 = require("./NextJs");
 var ShellExec_1 = require("./ShellExec");
+var FilesAndFolders_1 = require("./FilesAndFolders");
 var PackageNecessary_1 = __importDefault(require("./PackageNecessary"));
 var WithCleanners_1 = __importDefault(require("./WithCleanners"));
 var Interface = /** @class */ (function () {
@@ -101,6 +102,7 @@ var Interface = /** @class */ (function () {
         ]);
         if (cleanners)
             allCmds.push.apply(allCmds, __spreadArray(__spreadArray([], WithCleanners_1.default(nextOrReact === 'React')), ['echo "[+] package for clean code installed"']));
+        allCmds.push.apply(allCmds, __spreadArray(__spreadArray([], FilesAndFolders_1.cmdCreateFolders), ['echo "[+] created folders necessary"']));
         var separator = handleTypeSO_1.handleTypeOS(answers[interfaces_1.TypesStateSession.typeOf_OS]);
         var commandForExec = this.separatorsCommand(allCmds, separator);
         ShellExec_1.shellExec(commandForExec, function () {
