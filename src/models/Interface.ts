@@ -50,12 +50,17 @@ export default class Interface implements CliFrontnend {
 
     const allCmds: string[] = [
       tech,
+      `echo '[+] install ${nextOrReact}JS completed'`,
       `cd ${nameApplication}`,
       ...packageNecessary,
+      'echo "[+] package necessary installed"',
     ];
 
     if (cleanners)
-      allCmds.push(...cleannersPackageAndFiles(nextOrReact === 'React'));
+      allCmds.push(
+        ...cleannersPackageAndFiles(nextOrReact === 'React'),
+        'echo "[+] package for clean code installed"'
+      );
 
     const separator: string = handleTypeOS(
       answers[TypesStateSession.typeOf_OS]
@@ -64,8 +69,10 @@ export default class Interface implements CliFrontnend {
     const commandForExec: string = this.separatorsCommand(allCmds, separator);
 
     shellExec(commandForExec, () => {
-      // console.clear();
+      console.clear();
       spinner.succeed('Finished isntall the project!');
+      console.info(`cd ${nameApplication}`);
+      console.info('npm start');
     });
   }
 
