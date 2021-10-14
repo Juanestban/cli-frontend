@@ -11,6 +11,7 @@ import { questions } from './questions';
 import { CreateReactAppCommand } from './React';
 import { CreateNextAppCommand } from './NextJs';
 import { shellExec } from './ShellExec';
+import { cmdCreateFolders } from './FilesAndFolders';
 import packageNecessary from './PackageNecessary';
 import cleannersPackageAndFiles from './WithCleanners';
 
@@ -61,6 +62,8 @@ export default class Interface implements CliFrontnend {
         ...cleannersPackageAndFiles(nextOrReact === 'React'),
         'echo "[+] package for clean code installed"'
       );
+
+    allCmds.push(...cmdCreateFolders, 'echo "[+] created folders necessary"');
 
     const separator: string = handleTypeOS(
       answers[TypesStateSession.typeOf_OS]
