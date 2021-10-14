@@ -92,17 +92,22 @@ var Interface = /** @class */ (function () {
         };
         tech = condTech[nextOrReact]();
         spinner.start();
-        var allCmds = __spreadArray([
+        var allCmds = __spreadArray(__spreadArray([
             tech,
+            "echo '[+] install " + nextOrReact + "JS completed'",
             "cd " + nameApplication
-        ], PackageNecessary_1.default);
+        ], PackageNecessary_1.default), [
+            'echo "[+] package necessary installed"',
+        ]);
         if (cleanners)
-            allCmds.push.apply(allCmds, WithCleanners_1.default);
+            allCmds.push.apply(allCmds, __spreadArray(__spreadArray([], WithCleanners_1.default(nextOrReact === 'React')), ['echo "[+] package for clean code installed"']));
         var separator = handleTypeSO_1.handleTypeOS(answers[interfaces_1.TypesStateSession.typeOf_OS]);
         var commandForExec = this.separatorsCommand(allCmds, separator);
         ShellExec_1.shellExec(commandForExec, function () {
-            // console.clear();
+            console.clear();
             spinner.succeed('Finished isntall the project!');
+            console.info("cd " + nameApplication);
+            console.info('npm start');
         });
     };
     Interface.prototype.separatorsCommand = function (cmds, typeSeparator) {

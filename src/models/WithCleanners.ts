@@ -8,9 +8,10 @@ const packageCleaners = [
   'eslint-plugin-testing-library',
 ];
 
-export const installCleanners = `npm i eslint eslint-config-prettier prettier ${packageCleaners.join(
-  ' '
-)}`;
+export const installCleanners = (isReact: boolean): string =>
+  `npm i ${
+    !isReact ? 'eslint' : ''
+  } eslint-config-prettier prettier ${packageCleaners.join(' ')}`;
 
 const ignore = `.next
 node_modules
@@ -58,8 +59,8 @@ export const eslintignore = `echo "${ignore}" > .eslintignore`;
 
 export const lintStaged = 'npx mrm@2 lint-staged';
 
-const cleanners: string[] = [
-  installCleanners,
+const cleanners = (isReact: boolean): string[] => [
+  installCleanners(isReact),
   prettier,
   prettierignore,
   eslint,
