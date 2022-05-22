@@ -1,8 +1,24 @@
 #!/usr/bin/env node
 'use strict';
 
-console.log("hello world, I'm a rn => run command", process.cwd());
+const { existsSync } = require('fs');
+const { exec } = require('child_process');
+const { exit } = require('process');
 
-const { gen_questions } = require('../generator/models');
+if (!existsSync(`${process.cwd()}/dist`)) {
+  new Promise((resolve, reject) => {
+    const command_build = 'npm run build';
 
-console.log(gen_questions);
+    exec(command_build, (err, stdout) => {
+      if (err)
+        return reject(Error('[*] command has a error to try to execute'));
+
+      resolve(stdout);
+    });
+  })
+    .then(() => require('../dist/generator').run_generator())
+    .catch(() => console.log('[*] error to excecute the command'));
+  exit();
+}
+
+require('../dist/generator').run_generator();
