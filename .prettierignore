@@ -1,0 +1,4 @@
+/dist
+/build
+/coverage
+*.d.ts

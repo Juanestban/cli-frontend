@@ -9,3 +9,6 @@ package-lock.json
 
 ### run-file deprecated
 bin/run-copy
+
+eslint-cache
+10
