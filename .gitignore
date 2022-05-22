@@ -6,3 +6,6 @@ package-lock.json
 
 # build - dist
 # dist
+
+### run-file deprecated
+bin/run-copy
