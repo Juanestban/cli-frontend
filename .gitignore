@@ -12,3 +12,6 @@ bin/run-copy
 
 .eslintcache
 10
+
+### build / dist
+/dist

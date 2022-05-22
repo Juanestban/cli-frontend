@@ -19,8 +19,10 @@ module.exports = {
     'jsx-a11y/aria-role': 0,
     'no-undef': 0,
     'react/react-in-jsx-scope': 0,
+    'no-unused-vars': 0,
+    'no-useless-return': 0,
+    'no-new': 0,
     camelcase: 0,
     yoda: 0,
-    'no-unused-vars': 0,
   },
 };

@@ -2,16 +2,20 @@
   "compileOnSave": false,
   "compilerOptions": {
     "allowJs": true,
+    "checkJs": false,
     "rootDir": ".",
     "outDir": "dist",
     "sourceMap": true,
     "declaration": false,
+    "strict": true,
+    "strictFunctionTypes": true,
+    "esModuleInterop": true,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "es2015",
-    "module": "esnext",
+    "module": "commonjs",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
@@ -21,7 +25,7 @@
       "@cli-frontend-libs/*": ["libs/*"]
     }
   },
-  "include": ["generator", "src"],
+  "include": ["generator", "src", "bin"],
   "exclude": [
     "dist/**/*",
     "coverage/**/*",

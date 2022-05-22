@@ -4,10 +4,8 @@
   "ignore": [
     "src/**/*.spec.ts",
     "src/**/*.test.ts",
-    "src/**/*.test.js",
     "generator/**/*.spec.ts",
-    "generator/**/*.test.ts",
-    "generator/**/*.test.js"
+    "generator/**/*.test.ts"
   ],
-  "exec": "ts-node ./generator"
+  "exec": "yarn build"
 }
