@@ -4,9 +4,6 @@
 # nodes_folders
 node_modules
 
-# package
-package-lock.json
-
 # build - dist
 # dist
 
