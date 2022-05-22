@@ -1,7 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "allowJs": true,
     "rootDir": ".",
+    "outDir": "dist",
     "sourceMap": true,
     "declaration": false,
     "moduleResolution": "node",
@@ -15,17 +17,21 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cli-frontend/**": ["./**"],
-      "@cli-frontend-libs/**": ["libs/**"]
+      "@cli-frontend/*": ["./*"],
+      "@cli-frontend-libs/*": ["libs/*"]
     }
   },
+  "include": ["generator", "src"],
   "exclude": [
     "dist/**/*",
+    "coverage/**/*",
     "**/node_modules/**/*",
     "packages/toolkit-frontend/schematics_cli/blank/*-files/**/*",
     "packages/toolkit-frontend/*/test/**/*",
     "packages/schematics/*/*/*files/**/*",
     "tests/**/*",
-    "tools/**/*"
+    "tools/**/*",
+    "*.test.*",
+    "*.spec.*"
   ]
 }

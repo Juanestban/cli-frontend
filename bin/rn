@@ -1,4 +1,8 @@
 #!/usr/bin/env node
 'use strict';
 
-console.log("hello world, I'm a rn => run command");
+console.log("hello world, I'm a rn => run command", process.cwd());
+
+const { gen_questions } = require('../generator/models');
+
+console.log(gen_questions);

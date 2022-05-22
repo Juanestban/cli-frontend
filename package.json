@@ -20,12 +20,12 @@
   "scripts": {
     "init": "tsc --init",
     "start:run": "node ./bin/run",
-    "generate": "node ./bin/run",
+    "generate": "node ./bin/rn",
     "dev": "nodemon",
     "build": "tsc",
     "compile:exec:run": "yarn build && yarn start:run",
     "compile:generate": "yarn build && yarn generate",
-    "postinstall": "yarn husky install",
+    "postinstall": "yarn husky install && yarn build",
     "test": "jest"
   },
   "keywords": [
