@@ -19,12 +19,13 @@ export default class Interface implements CliFrontnend {
   public urlNextWithoutTsWithCleanners: string =
     'https://github.com/Juanestban/next-js-personalizated.git';
 
+  // eslint-disable-next-line no-useless-constructor
   constructor() {}
 
   // first question
   async run(): Promise<void> {
     const answers: Questions = await inquirer.prompt(questions);
-    if (answers.typeOf_OS == 'Windows') {
+    if (answers.typeOf_OS === 'Windows') {
       console.log(
         "[+] the OS Windows posibility hasn't function for the commands used to moment install and create files"
       );
@@ -36,7 +37,6 @@ export default class Interface implements CliFrontnend {
   }
 
   results(answers: Questions): void {
-    let tech: string;
     const spinner = ora({
       text: 'Installing the project...',
       discardStdin: false,
@@ -46,7 +46,7 @@ export default class Interface implements CliFrontnend {
       React: () => CreateReactAppCommand(nameApplication, ifImplementTs),
       Next: () => CreateNextAppCommand(nameApplication, ifImplementTs),
     };
-    tech = condTech[nextOrReact]();
+    const tech: string = condTech[nextOrReact]();
     spinner.start();
 
     const allCmds: string[] = [
