@@ -20,6 +20,7 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
+    "typeRoots": ["node_modules/@types", "generator/types"],
     "paths": {
       "@cli-frontend/*": ["./*"],
       "@cli-frontend-libs/*": ["libs/*"]

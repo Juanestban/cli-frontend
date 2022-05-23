@@ -21,7 +21,7 @@ export const gen_questions: QuestionCollection<any> = [
   {
     type: 'list',
     name: _type_generator_schema.GEN_TYPE_CSS_USE,
-    message: '',
+    message: 'what is the type of css want you?',
     choices: ['css', 'css-module', 'styled-components'],
   },
 ];

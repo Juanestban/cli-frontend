@@ -17,7 +17,9 @@ npx cli-frontend
 #### Authors
 
 Juan Esteban Echeverry Perdomo
+
 - [GitHub](https://github.com/Juanestban)
+- [Youtube](https://www.youtube.com/channel/UCZ_KUOqI00-gdppb6ddlYJw)
 
 #### Anothers webs created
 
